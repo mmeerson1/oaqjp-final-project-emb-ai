@@ -21,7 +21,13 @@ def sent_analyzer():
     if response['dominant_emotion'] is None:
         string_response = 'Invalid text! Please try again!'
     else:
-        string_response = f"For the given statement, the system response is 'anger':{str(response['anger'])}, 'disgust':{str(response['disgust'])}, 'fear':{str(response['fear'])}, 'joy':{str(response['joy'])} and sadness':{str(response['sadness'])}. The dominant emotion is <b>{response['dominant_emotion']}</b>."
+        string_response = f"For the given statement, the system response is \
+        'anger':{str(response['anger'])}, \
+        'disgust':{str(response['disgust'])}, \
+        'fear':{str(response['fear'])}, \
+        'joy':{str(response['joy'])} \
+        and sadness':{str(response['sadness'])}. \
+        The dominant emotion is <b>{response['dominant_emotion']}</b>."
     return string_response
 
 @app.route("/")
