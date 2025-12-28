@@ -2,12 +2,11 @@
     analysis to be executed over the Flask channel and deployed on
     localhost:5000.
 '''
-# Import Flask, render_template, request from the flask pramework package : TODO
-# Import the sentiment_analyzer function from the package created: TODO
+
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
-#Initiate the flask app : TODO
+
 app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
@@ -19,7 +18,11 @@ def sent_analyzer():
     '''
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
-    return response
+    if response['dominant_emotion'] is None:
+        string_response = 'Invalid text! Please try again!'
+    else:
+        string_response = f"For the given statement, the system response is 'anger':{str(response['anger'])}, 'disgust':{str(response['disgust'])}, 'fear':{str(response['fear'])}, 'joy':{str(response['joy'])} and sadness':{str(response['sadness'])}. The dominant emotion is <b>{response['dominant_emotion']}</b>."
+    return string_response
 
 @app.route("/")
 def render_index_page():
